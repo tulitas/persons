@@ -5,5 +5,5 @@ import persons.models.Persons;
 public interface PersonsService {
 
 
-    void addJobForm(Persons persons);
+    void addPersons(Persons persons);
 }

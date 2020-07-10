@@ -12,7 +12,7 @@
 </head>
 <body>
 <div>
-    <form action="options/signUn" method="post">
+    <form action="${pageContext.request.contextPath}options/create" method="post">
 
         <label for="login">Login</label>
         <input type="text" name="login" id="login"><br>
@@ -21,13 +21,13 @@
         <input type="text" name="password" id="password"><br>
 
         <label for="full_name">Name</label>
-        <input type="text" name="full_name" id="full_name"><br>
+        <input type="text" name="fullName" id="full_name"><br>
 
         <label for="age">Age</label>
         <input type="text" name="age" id="age"><br>
 
         <label for="reg_date">Time</label>
-        <input type="datetime-local" name="reg_date" id="reg_date"><br>
+        <input type="datetime-local" name="regDate" id="reg_date"><br>
 
         <p>
             <button class="add_button"> Pievienot</button>

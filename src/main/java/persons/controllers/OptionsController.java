@@ -20,7 +20,7 @@ public class OptionsController {
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
     public String options(Persons persons) {
-        personsService.addJobForm(persons);
+        personsService.addPersons(persons);
 
         return "create";
     }
