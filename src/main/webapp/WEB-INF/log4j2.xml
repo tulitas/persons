@@ -29,4 +29,15 @@
             <AppenderRef ref="ASYNC"/>
         </Root>
     </Loggers>
+
+
+    <RollingFile
+            name="FILE" fileName="logs/propertieslogs.log"
+            filePattern="logs/propertieslogs.log"
+            ignoreExceptions="false">
+        <PatternLayout>
+            <Pattern>%d{yyyy-MM-dd'_'HH-mm-ss} %p %m%n</Pattern>
+        </PatternLayout>
+        <TimeBasedTriggeringPolicy />
+    </RollingFile>
 </Configuration>

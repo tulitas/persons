@@ -9,5 +9,15 @@
       "name": "logger.socket.tresholdFilter",
       "type": "java.lang.String",
       "description": "Description for logger.socket.tresholdFilter."
+    },
+    {
+      "name": "logstash.port",
+      "type": "java.lang.String",
+      "description": "Description for logstash.port."
+    },
+    {
+      "name": "logger.console.tresholdFilter",
+      "type": "java.lang.String",
+      "description": "Description for logger.console.tresholdFilter."
     }
   ] }
