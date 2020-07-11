@@ -15,6 +15,7 @@
     <div>    <!-- buttons holder -->
         <button onclick="location.href='/signIn'">Sign In</button>
         <button onclick="location.href='/signUp'">Sign Up</button>
+        <button onclick="location.href='/options/personsList'">Persons List</button>
     </div>
 </div>
 </body>

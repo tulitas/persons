@@ -3,7 +3,9 @@ package persons.models;
 import javax.persistence.*;
 
 @Entity
+
 @Table(name = "persons", catalog = "calendar")
+
 public class Persons implements java.io.Serializable {
     @Id
     @Column(name = "id")

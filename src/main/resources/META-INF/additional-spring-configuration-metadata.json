@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "logstash.host",
+      "type": "java.lang.String",
+      "description": "Description for logstash.host."
+    },
+    {
+      "name": "logger.socket.tresholdFilter",
+      "type": "java.lang.String",
+      "description": "Description for logger.socket.tresholdFilter."
+    }
+  ] }

@@ -14,11 +14,21 @@ public class SiteController {
 
     @RequestMapping("/signIn")
     public ModelAndView signIn() {
-        return new ModelAndView("signIn");
+        return new ModelAndView("login");
     }
 
     @RequestMapping("/signUp")
     public ModelAndView signUp() {
-        return new ModelAndView("signUp");
+        return new ModelAndView("registration");
+
+    }
+    @RequestMapping("/personsList")
+    public ModelAndView personsList() {
+        return new ModelAndView("personsList");
+    }
+
+    @RequestMapping("/edit")
+    public ModelAndView edit() {
+        return new ModelAndView("edit");
     }
 }
