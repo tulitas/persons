@@ -19,5 +19,10 @@
       "name": "logger.console.tresholdFilter",
       "type": "java.lang.String",
       "description": "Description for logger.console.tresholdFilter."
+    },
+    {
+      "name": "application.properties",
+      "type": "java.lang.String",
+      "description": "Description for application.properties."
     }
   ] }

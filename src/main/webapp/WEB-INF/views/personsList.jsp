@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>hi</title>
+    <meta http-equiv="refresh" content="10"/>
 </head>
 <body>
 
@@ -39,6 +39,8 @@
         </tr>
     </c:forEach>
 </table>
-
+<font face="verdana" size="2">
+    Current Time :<%= new java.util.Date() %>
+</font>
 </body>
 </html>

@@ -3,6 +3,7 @@ package persons.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persons.models.Persons;
+import persons.repositories.PersonsRepository;
 import persons.services.PersonsService;
 
 import javax.validation.Valid;
@@ -24,7 +26,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Controller
 @RequestMapping("/")
 public class OptionsController {
-
+    private PersonsRepository personsRepository;
     private PersonsService personsService;
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     @Autowired
@@ -51,9 +53,12 @@ public class OptionsController {
     }
 
     @RequestMapping(value = "options/personsList")
-    public String getAll(Model model) {
+    public String getAll(Model model) throws InterruptedException {
         List<Persons> personsForms = personsService.getAll();
+
         model.addAttribute("personsList", personsForms);
+
+//        Thread.sleep(1000);
         return "personsList";
     }
 
