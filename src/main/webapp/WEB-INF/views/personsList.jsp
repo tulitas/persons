@@ -39,6 +39,8 @@
         </tr>
     </c:forEach>
 </table>
+<button onclick="location.href='/options/csv'">csv</button>
+
 <font face="verdana" size="2">
     Current Time :<%= new java.util.Date() %>
 </font>

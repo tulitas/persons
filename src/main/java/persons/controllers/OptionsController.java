@@ -3,7 +3,6 @@ package persons.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,31 +10,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persons.models.Persons;
-import persons.repositories.PersonsRepository;
 import persons.services.PersonsService;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Controller
 @RequestMapping("/")
 public class OptionsController {
-    private PersonsRepository personsRepository;
     private PersonsService personsService;
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
+    private String data = null;
     @Autowired
     public OptionsController(PersonsService personsService) {
         this.personsService = personsService;
     }
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String options(Persons persons, String password,Model model) throws NoSuchAlgorithmException {
+    public String options(Persons persons, String password, Model model) throws NoSuchAlgorithmException {
 
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
@@ -47,31 +49,47 @@ public class OptionsController {
         personsService.addPersons(persons);
         model.addAttribute("personToPopUp", persons);
         logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
-
-
-
         return "create";
     }
 
     @RequestMapping(value = "options/personsList")
     public String getAll(Model model) throws InterruptedException {
         List<Persons> personsForms = personsService.getAll();
-
         model.addAttribute("personsList", personsForms);
-//        List<Persons> asc = personsRepository.findAll(Sort.by(Sort.Direction.ASC, "age"));
-//        model.addAttribute("asd", asc);
-//        System.out.println("asd" + asc);
-//        Thread.sleep(1000);
+        setData(String.valueOf(model));
         return "personsList";
     }
 
-    @RequestMapping(value = "options/sort")
-    public String sortAsc(Model model) {
-        List<Persons> asc = personsRepository.findAll(Sort.by(Sort.Direction.ASC, "age"));
-        model.addAttribute("asd", asc);
-        System.out.println("asd" + asc);
-        return "redirect:personlist";
+//    @RequestMapping(value = "options/sort")
+//    public String sortAsc(Model model) {
+//        List<Persons> asc = personsService.getAll(Sort.by(Sort.Direction.ASC, "age"));
+//        model.addAttribute("asc", asc);
+//        System.out.println("asc" + asc);
+//        return "personsList";
+//    }
+
+    @RequestMapping(value = "options/csv")
+    public String getCsv() {
+        System.out.println(getData());
+        return Stream.of(getData())
+
+                .map(this::escapeSpecialCharacters)
+                .collect(Collectors.joining(","));
     }
+
+    private String escapeSpecialCharacters(String data) {
+        System.out.println(2 + data);
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        System.out.println(escapedData);
+        return escapedData;
+
+
+    }
+
 
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
     public String removeJobform(@PathVariable("id") long id) {
@@ -93,9 +111,16 @@ public class OptionsController {
             persons.setId(id);
             return "registration";
         }
-
         personsService.addPersons(persons);
         model.addAttribute("persons", personsService.getAll());
         return "personsList";
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

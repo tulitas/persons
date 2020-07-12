@@ -10,5 +10,4 @@ import java.util.List;
 public interface PersonsRepository extends CrudRepository<Persons, Long> {
 
 
-    List<Persons> findAll(Sort login);
 }
