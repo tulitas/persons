@@ -46,8 +46,9 @@ public class OptionsController {
         persons.setPassword(String.valueOf(hashedPassword));
         personsService.addPersons(persons);
         model.addAttribute("personToPopUp", persons);
-        System.out.println("654654 " + model);
         logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
+
+
 
         return "create";
     }
@@ -57,12 +58,20 @@ public class OptionsController {
         List<Persons> personsForms = personsService.getAll();
 
         model.addAttribute("personsList", personsForms);
-
+//        List<Persons> asc = personsRepository.findAll(Sort.by(Sort.Direction.ASC, "age"));
+//        model.addAttribute("asd", asc);
+//        System.out.println("asd" + asc);
 //        Thread.sleep(1000);
         return "personsList";
     }
 
-
+    @RequestMapping(value = "options/sort")
+    public String sortAsc(Model model) {
+        List<Persons> asc = personsRepository.findAll(Sort.by(Sort.Direction.ASC, "age"));
+        model.addAttribute("asd", asc);
+        System.out.println("asd" + asc);
+        return "redirect:personlist";
+    }
 
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
     public String removeJobform(@PathVariable("id") long id) {

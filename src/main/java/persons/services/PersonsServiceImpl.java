@@ -1,11 +1,13 @@
 package persons.services;
 
+import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
 
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +42,8 @@ public class PersonsServiceImpl implements PersonsService {
     public Optional<Persons> findById(long id) {
         return personsRepository.findById(id);
     }
+
+
 
 
 }
