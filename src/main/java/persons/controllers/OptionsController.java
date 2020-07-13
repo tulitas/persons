@@ -1,19 +1,29 @@
 package persons.controllers;
 
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.opencsv.CSVWriter;
+import org.h2.tools.Csv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 import persons.models.Persons;
 import persons.services.PersonsService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -60,35 +70,63 @@ public class OptionsController {
         return "personsList";
     }
 
-//    @RequestMapping(value = "options/sort")
+
+    //    @RequestMapping(value = "options/sort")
 //    public String sortAsc(Model model) {
 //        List<Persons> asc = personsService.getAll(Sort.by(Sort.Direction.ASC, "age"));
 //        model.addAttribute("asc", asc);
 //        System.out.println("asc" + asc);
 //        return "personsList";
 //    }
+    @GetMapping(value = "options/csv")
+    public void exportToCsv(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        String fileName = "file.csv";
+        String headerKey = "Content-Desposition";
+        String headerValue = "attachment; filename " + fileName;
+        response.setHeader(headerKey, headerValue);
+        List<Persons> personsList = personsService.getAll();
+        ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 
-    @RequestMapping(value = "options/csv")
-    public String getCsv() {
-        System.out.println(getData());
-        return Stream.of(getData())
+        String[] csvHeader = {"User Id", "Login", "Password"};
+        String[] nameMaping = {"id", "login", "password"};
 
-                .map(this::escapeSpecialCharacters)
-                .collect(Collectors.joining(","));
-    }
-
-    private String escapeSpecialCharacters(String data) {
-        System.out.println(2 + data);
-        String escapedData = data.replaceAll("\\R", " ");
-        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-            data = data.replace("\"", "\"\"");
-            escapedData = "\"" + data + "\"";
+        csvBeanWriter.writeHeader(csvHeader);
+        for (Persons persons : personsList) {
+            csvBeanWriter.write(persons, nameMaping);
         }
-        System.out.println(escapedData);
-        return escapedData;
-
-
+        csvBeanWriter.close();
     }
+//    @RequestMapping(value = "options/csv")
+//    public String getCsv() {
+//        return Stream.of(getData())
+//
+//                .map(this::escapeSpecialCharacters)
+//                .collect(Collectors.joining(","));
+//    }
+//
+//    private String escapeSpecialCharacters(String data) {
+//        String escapedData = data.replaceAll("\\R", " ");
+//        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+//            data = data.replace("\"", "\"\"");
+//            escapedData = "\"" + data + "\"";
+//        }
+//        givenDataArray();
+//        return escapedData;
+//
+//
+//    }
+//    public void givenDataArray()  {
+//        File csvOutputFile = new File("src/main/resources/file.csv");
+//        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+//        int d =     data.compareTo(String.valueOf(csvOutputFile));
+//
+//            System.out.println("d " + d);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
