@@ -39,7 +39,8 @@
         </tr>
     </c:forEach>
 </table>
-<button onclick="location.href='/options/csv'">csv</button>
+<button onclick="location.href='/options/csv'">download CSV</button>
+<button onclick="location.href='/options/uploadCsv'">upload CSV</button>
 
 <font face="verdana" size="2">
     Current Time :<%= new java.util.Date() %>
