@@ -3,6 +3,7 @@ package persons.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,8 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,13 +37,20 @@ public class OptionsController {
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
+
     @Autowired
     public OptionsController(PersonsService personsService) {
         this.personsService = personsService;
     }
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String options(Persons persons, String password, Model model) throws NoSuchAlgorithmException {
+    public String options(Persons persons, String password, Model model, String login) throws NoSuchAlgorithmException {
+        String x = persons.getLogin();
+        if (x.equals(login)) {
+            System.out.println("login " + login + " exist");
+            return "registration";
+        }
+
 
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
@@ -112,6 +122,7 @@ public class OptionsController {
             e.printStackTrace();
         }
     }
+
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
     public String removeJobform(@PathVariable("id") long id) {
         personsService.removeJobForm(id);
