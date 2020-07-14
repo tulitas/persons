@@ -41,17 +41,17 @@ public class OptionsController {
     }
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String options(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
-        String x = persons.getLogin();
+    public String loginValidation(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
+        String chekLogin = personsService.getLogin(login);
+        System.out.println("used login " + chekLogin);
         String errorMesage = null;
-        if (x.equals(login)) {
+        if (chekLogin == login) {
             System.out.println("login " + login + " exist");
 
             errorMesage = "login zanjat";
             model.addAttribute("errorMesage", errorMesage);
             return "registration";
-        }
-
+        }else {
 
 
         SecureRandom random = new SecureRandom();
@@ -65,7 +65,7 @@ public class OptionsController {
         model.addAttribute("personToPopUp", persons);
         logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
         return "create";
-    }
+    }}
 
     @RequestMapping(value = "options/personsList")
     public String getAll(Model model) throws InterruptedException {
