@@ -1,5 +1,8 @@
 package persons.models;
 
+import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 
 @Entity
@@ -27,7 +30,7 @@ public class Persons implements java.io.Serializable {
     @Column(name = "reg_date")
     private String regDate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

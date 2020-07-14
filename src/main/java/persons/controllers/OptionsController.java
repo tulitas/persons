@@ -119,10 +119,13 @@ public class OptionsController {
                 persons.setAge(Integer.parseInt(data[4]));
                 persons.setRegDate(data[5]);
                 personsService.addPersons(persons);
+
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
