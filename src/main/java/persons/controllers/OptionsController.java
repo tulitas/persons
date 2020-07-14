@@ -7,10 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -44,12 +41,17 @@ public class OptionsController {
     }
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String options(Persons persons, String password, Model model, String login) throws NoSuchAlgorithmException {
+    public String options(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
         String x = persons.getLogin();
+        String errorMesage = null;
         if (x.equals(login)) {
             System.out.println("login " + login + " exist");
+
+            errorMesage = "login zanjat";
+            model.addAttribute("errorMesage", errorMesage);
             return "registration";
         }
+
 
 
         SecureRandom random = new SecureRandom();
