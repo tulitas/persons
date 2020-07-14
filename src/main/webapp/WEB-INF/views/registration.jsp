@@ -65,4 +65,6 @@
 <c:if test="${not empty errorMesage}">${errorMesage}</c:if>
 </div>
 </body>
+<a href="${pageContext.request.contextPath}/">Main Page</a>
+
 </html>

@@ -29,5 +29,7 @@
         </form>
     </section>
 </div>
+<a href="${pageContext.request.contextPath}/">Main Page</a>
+
 </body>
 </html>

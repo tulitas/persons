@@ -74,6 +74,6 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.href='/signIn'">Close</button>
     </div>
 </div>
-
+<a href="${pageContext.request.contextPath}/">Main Page</a>
 </body>
 </html>

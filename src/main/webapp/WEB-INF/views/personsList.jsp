@@ -172,4 +172,6 @@
     Current Time :<%= new java.util.Date() %>
 </font>
 </body>
+<a href="${pageContext.request.contextPath}/">Main Page</a>
+
 </html>

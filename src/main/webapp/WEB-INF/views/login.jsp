@@ -99,6 +99,8 @@
         <button type="button" class="cancelbtn">Cancel</button>
         <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
+    <a href="${pageContext.request.contextPath}/">Main Page</a>
+
 </form>
 
 
