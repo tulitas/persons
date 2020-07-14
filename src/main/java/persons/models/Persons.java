@@ -30,7 +30,7 @@ public class Persons implements java.io.Serializable {
     @Column(name = "reg_date")
     private String regDate;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

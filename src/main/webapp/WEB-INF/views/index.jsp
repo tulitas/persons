@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: SergejK
@@ -8,14 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
     <title>Persons Note</title>
 </head>
-<body>
-<div>       <!-- content -->
-    <div>    <!-- buttons holder -->
-        <button onclick="location.href='/signIn'">Sign In</button>
-        <button onclick="location.href='/signUp'">Sign Up</button>
-        <button onclick="location.href='/options/personsList'">Persons List</button>
+<body style="background-color: cadetblue">
+<div  id="buttonBox">
+    <div >
+        <button class="mainButtons" onclick="location.href='/signIn'">Sign In</button>
+        <button class="mainButtons" onclick="location.href='/signUp'">Sign Up</button>
+        <button class="mainButtons" onclick="location.href='/options/personsList'">Persons List</button>
     </div>
 </div>
 </body>
