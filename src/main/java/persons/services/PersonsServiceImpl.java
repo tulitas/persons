@@ -1,31 +1,38 @@
 package persons.services;
 
-import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
 
-import javax.persistence.Query;
-import javax.sound.midi.Soundbank;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PersonsServiceImpl implements PersonsService {
+    @Autowired
     private final PersonsRepository personsRepository;
-
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     public PersonsServiceImpl(PersonsRepository personsRepository) {
         this.personsRepository = personsRepository;
     }
-
+//    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional
-    public void addPersons(Persons persons) {
+    public boolean addPersons(Persons persons) {
+
+
         personsRepository.save(persons);
+        return true;
+
 
     }
 

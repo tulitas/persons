@@ -1,6 +1,5 @@
 package persons.services;
 
-import org.springframework.data.domain.Sort;
 import persons.models.Persons;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Optional;
 public interface PersonsService {
 
 
-    void addPersons(Persons persons);
+    boolean addPersons(Persons persons);
 
     List<Persons> getAll();
 

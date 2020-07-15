@@ -42,6 +42,8 @@ public class OptionsController {
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
     public String loginValidation(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
+
+
         Object chekLogin = personsService.getLogin(login);
         System.out.println("chek " + chekLogin);
         Object errorMesage = null;
@@ -51,21 +53,22 @@ public class OptionsController {
             errorMesage = "login zanjat";
             model.addAttribute("errorMesage", errorMesage);
             return "registration";
-        }else {
+        } else {
 
 
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(salt);
-        byte[] hashedPassword = md.digest(password.getBytes(UTF_8));
-        persons.setPassword(String.valueOf(hashedPassword));
-        personsService.addPersons(persons);
-        model.addAttribute("personToPopUp", persons);
-        logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
-        return "create";
-    }}
+            SecureRandom random = new SecureRandom();
+            byte[] salt = new byte[16];
+            random.nextBytes(salt);
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+            byte[] hashedPassword = md.digest(password.getBytes(UTF_8));
+            persons.setPassword(String.valueOf(hashedPassword));
+            personsService.addPersons(persons);
+            model.addAttribute("personToPopUp", persons);
+            logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
+            return "create";
+        }
+    }
 
     @RequestMapping(value = "options/personsList")
     public String getAll(Model model) throws InterruptedException {
