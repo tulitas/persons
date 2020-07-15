@@ -42,12 +42,12 @@ public class OptionsController {
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
     public String loginValidation(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
-        String chekLogin = personsService.getLogin(login);
-        System.out.println("used login " + chekLogin);
-        String errorMesage = null;
-        if (chekLogin == login) {
-            System.out.println("login " + login + " exist");
-
+        Object chekLogin = personsService.getLogin(login);
+        System.out.println("chek " + chekLogin);
+        Object errorMesage = null;
+        System.out.println("login chek login " + login + chekLogin);
+        if (chekLogin != null) {
+            System.out.println("proverka");
             errorMesage = "login zanjat";
             model.addAttribute("errorMesage", errorMesage);
             return "registration";
@@ -119,8 +119,6 @@ public class OptionsController {
                 persons.setAge(Integer.parseInt(data[4]));
                 persons.setRegDate(data[5]);
                 personsService.addPersons(persons);
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();

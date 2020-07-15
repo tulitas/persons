@@ -8,6 +8,7 @@ import persons.models.Persons;
 import persons.repositories.PersonsRepository;
 
 import javax.persistence.Query;
+import javax.sound.midi.Soundbank;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,7 @@ public class PersonsServiceImpl implements PersonsService {
 
     @Override
     public String getLogin(String login) {
-        return personsRepository.chekLogin(login);
+        return personsRepository.getLogin(login);
     }
 
 
