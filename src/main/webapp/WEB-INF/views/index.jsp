@@ -15,8 +15,8 @@
 <body style="background-color: cadetblue">
 <div  id="buttonBox">
     <div >
-        <button class="mainButtons" onclick="location.href='/signIn'">Sign In</button>
-        <button class="mainButtons" onclick="location.href='/signUp'">Sign Up</button>
+        <button class="mainButtons" onclick="location.href='/login'">Sign In</button>
+        <button class="mainButtons" onclick="location.href='/registration'">Sign Up</button>
         <button class="mainButtons" onclick="location.href='/options/personsList'">Persons List</button>
     </div>
 </div>

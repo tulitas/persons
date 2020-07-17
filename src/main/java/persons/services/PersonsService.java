@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface PersonsService {
 
 
-    boolean addPersons(Persons persons);
+    void addPersons(Persons persons);
 
     List<Persons> getAll();
 
@@ -16,6 +16,6 @@ public interface PersonsService {
 
     Optional<Persons> findById(long id);
 
-
+    String getPassword();
     String getLogin(String login);
 }

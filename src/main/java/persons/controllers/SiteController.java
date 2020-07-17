@@ -12,13 +12,13 @@ public class SiteController {
         return new ModelAndView("index");
     }
 
-    @RequestMapping("/signIn")
-    public ModelAndView signIn() {
+    @RequestMapping("/login")
+    public ModelAndView login() {
         return new ModelAndView("login");
     }
 
-    @RequestMapping("/signUp")
-    public ModelAndView signUp() {
+    @RequestMapping("/registration")
+    public ModelAndView registration() {
         return new ModelAndView("registration");
 
     }

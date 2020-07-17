@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="sec" uri="http://www.springframework.org/tags" %>--%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: SergejK
@@ -102,6 +104,7 @@
         }
     }
 </script>
+<sec:authorize access="isAuthenticated()">
 <button onclick="sortTableByLogin()">Sort by login</button>
 <button onclick="sortTableByLoginByName()">Sort by name</button>
 <button onclick="sortTableByAge()">Sort by age</button>
@@ -140,6 +143,7 @@
 <div class="time">
     Current Time :<%= new java.util.Date() %><br>
 </div>
+</sec:authorize>
 </body>
 
 <a href="${pageContext.request.contextPath}/">Main Page</a>

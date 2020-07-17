@@ -1,7 +1,6 @@
 package persons.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import persons.models.Persons;
@@ -16,23 +15,17 @@ import java.util.Optional;
 public class PersonsServiceImpl implements PersonsService {
     @Autowired
     private final PersonsRepository personsRepository;
-    @PersistenceContext
-    private EntityManager entityManager;
+
     @Autowired
     public PersonsServiceImpl(PersonsRepository personsRepository) {
         this.personsRepository = personsRepository;
     }
-//    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     @Transactional
-    public boolean addPersons(Persons persons) {
-
-
+    public void addPersons(Persons persons) {
         personsRepository.save(persons);
-        return true;
-
 
     }
 
@@ -52,9 +45,16 @@ public class PersonsServiceImpl implements PersonsService {
     }
 
     @Override
+    public String getPassword() {
+        return personsRepository.getPassword();
+    }
+
+
+    @Override
     public String getLogin(String login) {
         return personsRepository.getLogin(login);
     }
+
 
 
 }

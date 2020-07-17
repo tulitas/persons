@@ -1,12 +1,6 @@
 package persons.models;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Set;
 
 @Entity
 
@@ -33,12 +27,6 @@ public class Persons implements java.io.Serializable {
     @Column(name = "reg_date")
     private String regDate;
 
-    @Transient
-    private String passwordConfirm;
-
-    public Persons() {
-    }
-
     public long getId() {
         return id;
     }
@@ -47,13 +35,6 @@ public class Persons implements java.io.Serializable {
         this.id = id;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
     public String getLogin() {
         return login;
     }

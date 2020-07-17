@@ -8,8 +8,11 @@ import persons.models.Persons;
 
 public interface PersonsRepository extends CrudRepository<Persons, Long> {
 
+
+
     @Query(value = "SELECT login from persons.persons where login = :login", nativeQuery = true)
     String getLogin(String login);
 
-
+    @Query(value = "SELECT password from persons.persons where login = :login and password = :password", nativeQuery = true)
+    String getPassword();
 }

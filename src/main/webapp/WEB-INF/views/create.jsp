@@ -71,7 +71,7 @@
 
             </tr>
         </table>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.href='/signIn'">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.href='/login'">Close</button>
     </div>
 </div>
 <a href="${pageContext.request.contextPath}/">Main Page</a>
