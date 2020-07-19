@@ -56,7 +56,7 @@ public class OptionsController {
             return "error";
         } else {
             PasswordCoder passwordCoder = new PasswordCoder(password);
-            persons.setPassword(String.valueOf(passwordCoder.getHashedPassword()));
+            persons.setPassword(String.valueOf(passwordCoder.getHashtext() + " " + passwordCoder.getHashedPassword()));
             personsService.addPersons(persons);
             model.addAttribute("personToPopUp", persons);
             logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");

@@ -41,9 +41,11 @@ public class AuthProviderImpl implements AuthenticationProvider {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println("Entered  login  and password  -> " + login + " " + password);
-        System.out.println("coded entered pass and from BD " + passwordCoder.getHashedPassword()+ " " + persons.getPassword());
-        if (!passwordCoder.getHashedPassword().equals(persons.getPassword())) {
+//        System.out.println("Entered  login  and password  -> " + login + " " + password);
+        System.out.println(" password from BD " +  " " + persons.getPassword());
+        System.out.println("hash text print from auth prov  " +  " " + passwordCoder.getHashtext());
+
+        if (!persons.getPassword().matches(passwordCoder.getHashtext())) {
             throw new BadCredentialsException("Bad credential");
 
         }
