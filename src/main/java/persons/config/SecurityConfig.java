@@ -28,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("login")
                 .and().logout();
-
     }
 
     @Override

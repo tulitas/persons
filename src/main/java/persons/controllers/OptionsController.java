@@ -42,17 +42,17 @@ public class OptionsController {
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
     public String loginValidation(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
-        Object chekLogin = personsService.getLogin(login);
-        System.out.println("chek " + chekLogin);
-        Object errorMesage = null;
-        System.out.println("login chek login " + login + chekLogin);
-        if (chekLogin != null) {
-            System.out.println("proverka");
-            errorMesage = "login zanjat";
-            model.addAttribute("errorMesage", errorMesage);
-            return "registration";
-        }else {
-
+//        Object chekLogin = personsService.getLogin(login);
+//        System.out.println("chek " + chekLogin);
+//        Object errorMesage = null;
+//        System.out.println("login chek login " + login + chekLogin);
+//        if (chekLogin != null) {
+//            System.out.println("proverka");
+//            errorMesage = "login zanjat";
+//            model.addAttribute("errorMesage", errorMesage);
+//            return "registration";
+//        }else {
+//
 
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
@@ -65,7 +65,7 @@ public class OptionsController {
         model.addAttribute("personToPopUp", persons);
         logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
         return "create";
-    }}
+    }
 
     @RequestMapping(value = "options/personsList")
     public String getAll(Model model) throws InterruptedException {
@@ -151,13 +151,12 @@ public class OptionsController {
         return "personsList";
     }
 
-    @RequestMapping(value = "/login/process", method = RequestMethod.POST)
+    @RequestMapping(value = "/loginn")
     public String login(@RequestParam(name = "error", required = false) Boolean error,
                         Model model) {
         if (Boolean.TRUE.equals(error)) {
             model.addAttribute("error", true);
         }
-        System.out.println("bubiu");
         return "personsList";
     }
 

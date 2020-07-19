@@ -23,15 +23,22 @@ public class AuthProviderImpl implements AuthenticationProvider {
     PersonsRepository personsRepository;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String login = authentication.getName();
-        String persons = personsRepository.getLogin(login);
+        Persons persons = personsRepository.getLogin(login);
+        System.out.println("Entered login and login from BD is  -> " + login + " " + persons);
+//        String pas = personsRepository.getPassword();
+//        System.out.println("entered pernon password is " + pas);
+        String password = authentication.getCredentials().toString();
         if (persons == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        String password = authentication.getCredentials().toString();
-        if (!password.equals(personsRepository.getPassword())) {
+
+        if (!password.equals(persons.getPassword())) {
             throw new BadCredentialsException("Bad credential");
+
         }
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         return new UsernamePasswordAuthenticationToken(persons, null, authorities);
     }

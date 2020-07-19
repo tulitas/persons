@@ -16,6 +16,8 @@ public interface PersonsService {
 
     Optional<Persons> findById(long id);
 
-    String getPassword();
+
+//    String getPassword();
+
     String getLogin(String login);
 }
