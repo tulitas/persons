@@ -12,8 +12,11 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 import persons.models.Persons;
+import persons.repositories.PersonsRepository;
 import persons.services.PersonsService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
@@ -34,14 +37,17 @@ public class OptionsController {
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
-
+    @PersistenceContext
+    private EntityManager em;
+    @Autowired
+    PersonsRepository personsRepository;
     @Autowired
     public OptionsController(PersonsService personsService) {
         this.personsService = personsService;
     }
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String loginValidation(Persons persons, String password, Model model, String login, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
+    public String loginValidation(Persons persons, String password, Model model, String login,BindingResult result, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
 //        Object chekLogin = personsService.getLogin(login);
 //        System.out.println("chek " + chekLogin);
 //        Object errorMesage = null;
@@ -53,7 +59,10 @@ public class OptionsController {
 //            return "registration";
 //        }else {
 //
-
+        Persons personFromBd = personsRepository.getLogin(login);
+        if (result.hasErrors()) {
+            return "error";
+        }
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);

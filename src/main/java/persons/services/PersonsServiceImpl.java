@@ -26,7 +26,6 @@ public class PersonsServiceImpl implements PersonsService {
     @Transactional
     public void addPersons(Persons persons) {
         personsRepository.save(persons);
-
     }
 
     @Override

@@ -140,12 +140,18 @@
 <button onclick="location.href='/options/uploadCsv'">upload CSV</button>
 <br>
 
-<div class="time">
-    Current Time :<%= new java.util.Date() %><br>
-</div>
+    <body>
+
+    <a href="<c:url value="/logout"/>">Logout</a>
+
+    </body>
 </sec:authorize>
-</body>
 
 <a href="${pageContext.request.contextPath}/">Main Page</a>
+<div>
+    Current Time :<%= new java.util.Date() %><br>
+</div>
+</body>
+
 
 </html>

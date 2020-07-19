@@ -106,5 +106,6 @@
 </form>
 <%--</form>--%>
 </body>
+<a href="${pageContext.request.contextPath}/">Main Page</a>
 
 </html>
