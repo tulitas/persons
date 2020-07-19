@@ -20,37 +20,45 @@ import java.util.List;
 @Component
 public class AuthProviderImpl implements AuthenticationProvider {
 
-    private PasswordCoder passwordCoder;
+
     @Autowired
     PersonsRepository personsRepository;
 
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String login = authentication.getName();
         Persons persons = personsRepository.getLogin(login);
-
-
-
-        if (persons == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
         String password = authentication.getCredentials().toString();
+        PasswordCoder passwordCoder = null;
         try {
-             passwordCoder = new PasswordCoder(password);
+            passwordCoder = new PasswordCoder(password);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-//        System.out.println("Entered  login  and password  -> " + login + " " + password);
-        System.out.println(" password from BD " +  " " + persons.getPassword());
-        System.out.println("hash text print from auth prov  " +  " " + passwordCoder.getHashtext());
 
-        if (!persons.getPassword().matches(passwordCoder.getHashtext())) {
+        String ss = passwordCoder.getHashtext();
+        String bb = persons.getPassword();
+        if (persons == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        if (bb.equals(ss)) {
+            System.out.println("dddddd");
+        }
+//
+//        System.out.println(" password from BD " +  " " + persons.getPassword());
+//        System.out.println("hash text print from auth prov  " +  " " + passwordCoder.getHashtext());
+        System.out.println(persons.getPassword() + "\n" + passwordCoder.getHashtext());
+
+        if (!persons.getPassword().equals(passwordCoder.getHashtext())) {
             throw new BadCredentialsException("Bad credential");
 
         }
 
+
         List<GrantedAuthority> authorities = new ArrayList<>();
+
         return new UsernamePasswordAuthenticationToken(persons, null, authorities);
     }
 
