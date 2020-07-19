@@ -13,6 +13,7 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
+import persons.security.PasswordCoder;
 import persons.services.PersonsService;
 
 import javax.persistence.EntityManager;
@@ -23,8 +24,6 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,43 +36,32 @@ public class OptionsController {
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
+
     @PersistenceContext
     private EntityManager em;
     @Autowired
     PersonsRepository personsRepository;
+
     @Autowired
     public OptionsController(PersonsService personsService) {
         this.personsService = personsService;
     }
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String loginValidation(Persons persons, String password, Model model, String login,BindingResult result, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
-//        Object chekLogin = personsService.getLogin(login);
-//        System.out.println("chek " + chekLogin);
-//        Object errorMesage = null;
-//        System.out.println("login chek login " + login + chekLogin);
-//        if (chekLogin != null) {
-//            System.out.println("proverka");
-//            errorMesage = "login zanjat";
-//            model.addAttribute("errorMesage", errorMesage);
-//            return "registration";
-//        }else {
-//
+    public String loginValidation(Persons persons, String password, Model model, String login, BindingResult result, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
+
         Persons personFromBd = personsRepository.getLogin(login);
-        if (result.hasErrors()) {
+        if (personFromBd != null) {
+            model.addAttribute("error", login);
             return "error";
+        } else {
+            PasswordCoder passwordCoder = new PasswordCoder(password);
+            persons.setPassword(String.valueOf(passwordCoder.getHashedPassword()));
+            personsService.addPersons(persons);
+            model.addAttribute("personToPopUp", persons);
+            logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
+            return "create";
         }
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(salt);
-        byte[] hashedPassword = md.digest(password.getBytes(UTF_8));
-        persons.setPassword(String.valueOf(hashedPassword));
-        personsService.addPersons(persons);
-        model.addAttribute("personToPopUp", persons);
-        logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
-        return "create";
     }
 
     @RequestMapping(value = "options/personsList")
@@ -85,13 +73,6 @@ public class OptionsController {
     }
 
 
-    //    @RequestMapping(value = "options/sort")
-//    public String sortAsc(Model model) {
-//        List<Persons> asc = personsService.getAll(Sort.by(Sort.Direction.ASC, "age"));
-//        model.addAttribute("asc", asc);
-//        System.out.println("asc" + asc);
-//        return "personsList";
-//    }
     @GetMapping(value = "options/csv")
     public String exportToCsv(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
@@ -173,7 +154,7 @@ public class OptionsController {
         return data;
     }
 
-    public void setData(String data) {
+    private void setData(String data) {
         this.data = data;
     }
 }

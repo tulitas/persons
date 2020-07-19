@@ -43,11 +43,6 @@ public class PersonsServiceImpl implements PersonsService {
         return personsRepository.findById(id);
     }
 
-//    @Override
-//    public String getPassword() {
-//        return personsRepository.getPassword();
-//    }
-
 
     @Override
     public String getLogin(String login) {
