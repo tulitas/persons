@@ -17,7 +17,7 @@
     <a href="<c:url value="/logout"/>">Logout</a>
     Welcome.
     You can use<p>
-    <button onclick="location.href='/personsList'">Persons List</button>
+    <button onclick="location.href='/options/personsList'">Persons List</button>
     <p>
         <button onclick="location.href='/palindrom'">Palindrom</button>
         <button onclick="location.href='/numberToStringX'">Number To String</button>
