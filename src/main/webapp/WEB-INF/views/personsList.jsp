@@ -63,8 +63,8 @@
             for (i = 1; i < (rows.length - 1); i++) {
                 shouldSwitch = false;
 
-                x = rows[i].getElementsByTagName("TD")[3];
-                y = rows[i + 1].getElementsByTagName("TD")[3];
+                x = rows[i].getElementsByTagName("TD")[2];
+                y = rows[i + 1].getElementsByTagName("TD")[2];
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
                     break;
@@ -89,8 +89,8 @@
             for (i = 1; i < (rows.length - 1); i++) {
                 shouldSwitch = false;
 
-                x = rows[i].getElementsByTagName("TD")[4];
-                y = rows[i + 1].getElementsByTagName("TD")[4];
+                x = rows[i].getElementsByTagName("TD")[3];
+                y = rows[i + 1].getElementsByTagName("TD")[3];
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
                     break;
@@ -112,7 +112,6 @@
     <tr>
         <th>ID</th>
         <th>Login</th>
-        <th>Password</th>
         <th>Full Name</th>
         <th>Age</th>
         <th>Registration Date</th>
@@ -127,7 +126,6 @@
             <td width="75">${personsForm.id}</td>
 
             <td width="50">${personsForm.login}</td>
-            <td width="50">${personsForm.password}</td>
             <td width="50">${personsForm.fullName}</td>
             <td width="50">${personsForm.age}</td>
             <td width="50">${personsForm.regDate}</td>

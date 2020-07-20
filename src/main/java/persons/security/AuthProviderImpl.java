@@ -21,6 +21,7 @@ import java.util.List;
 public class AuthProviderImpl implements AuthenticationProvider {
 
 
+
     @Autowired
     PersonsRepository personsRepository;
 
@@ -38,26 +39,23 @@ public class AuthProviderImpl implements AuthenticationProvider {
             e.printStackTrace();
         }
 
-        String ss = passwordCoder.getHashtext();
-        String bb = persons.getPassword();
+
         if (persons == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        if (bb.equals(ss)) {
-            System.out.println("dddddd");
-        }
-//
-//        System.out.println(" password from BD " +  " " + persons.getPassword());
-//        System.out.println("hash text print from auth prov  " +  " " + passwordCoder.getHashtext());
-        System.out.println(persons.getPassword() + "\n" + passwordCoder.getHashtext());
 
-        if (!persons.getPassword().equals(passwordCoder.getHashtext())) {
-            throw new BadCredentialsException("Bad credential");
+        Object x = persons.getPassword();
+        Object y = passwordCoder.getHashtext();
+
+        if (x.equals(y)) {
+            System.out.println("aaaa");
+//            throw new BadCredentialsException("Bad credential");
 
         }
 
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
+
+            List<GrantedAuthority> authorities = new ArrayList<>();
 
         return new UsernamePasswordAuthenticationToken(persons, null, authorities);
     }
