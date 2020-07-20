@@ -49,6 +49,10 @@ public class PersonsServiceImpl implements PersonsService {
         return String.valueOf(personsRepository.getLogin(login));
     }
 
+    @Override
+    public String getLoginName(String login) {
+        return personsRepository.getLoginName(login);
+    }
 
 
 }

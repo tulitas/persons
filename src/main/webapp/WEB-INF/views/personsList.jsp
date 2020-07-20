@@ -105,38 +105,40 @@
     }
 </script>
 <sec:authorize access="isAuthenticated()">
-<button onclick="sortTableByLogin()">Sort by login</button>
-<button onclick="sortTableByLoginByName()">Sort by name</button>
-<button onclick="sortTableByAge()">Sort by age</button>
-<table id="myTable">
-    <tr>
-        <th>ID</th>
-        <th>Login</th>
-        <th>Full Name</th>
-        <th>Age</th>
-        <th>Registration Date</th>
-        <th colspan="2">Action</th>
-
-
-    </tr>
-
-    <c:forEach var="personsForm" items="${personsList}">
-
+    <button onclick="sortTableByLogin()">Sort by login</button>
+    <button onclick="sortTableByLoginByName()">Sort by name</button>
+    <button onclick="sortTableByAge()">Sort by age</button>
+    <button onclick="location.href='/palindrom'">Palindrom</button>
+    <button onclick="location.href='/numberToStringX'">Number To String</button>
+    <table id="myTable">
         <tr>
-            <td width="75">${personsForm.id}</td>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Full Name</th>
+            <th>Age</th>
+            <th>Registration Date</th>
+            <th colspan="2">Action</th>
 
-            <td width="50">${personsForm.login}</td>
-            <td width="50">${personsForm.fullName}</td>
-            <td width="50">${personsForm.age}</td>
-            <td width="50">${personsForm.regDate}</td>
-            <td width="50"><a href="/options/delete${personsForm.id}">Delete</a></td>
-            <td width="50"><a class="delete" href="/options/edit${personsForm.id}">Edit</a></td>
+
         </tr>
-    </c:forEach>
-</table>
-<button onclick="location.href='/options/csv'">download CSV</button>
-<button onclick="location.href='/options/uploadCsv'">upload CSV</button>
-<br>
+
+        <c:forEach var="personsForm" items="${personsList}">
+
+            <tr>
+                <td width="75">${personsForm.id}</td>
+
+                <td width="50">${personsForm.login}</td>
+                <td width="50">${personsForm.fullName}</td>
+                <td width="50">${personsForm.age}</td>
+                <td width="50">${personsForm.regDate}</td>
+                <td width="50"><a href="/options/delete${personsForm.id}">Delete</a></td>
+                <td width="50"><a class="delete" href="/options/edit${personsForm.id}">Edit</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <button onclick="location.href='/options/csv'">download CSV</button>
+    <button onclick="location.href='/options/uploadCsv'">upload CSV</button>
+    <br>
 
     <body>
 

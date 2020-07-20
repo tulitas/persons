@@ -21,12 +21,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http ) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login", "/registration").anonymous()
-                .antMatchers("/personsList", "/create").authenticated()
+                .antMatchers("/personsList", "/create", "/welcome").authenticated()
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/process")
                 .usernameParameter("login")
+                .defaultSuccessUrl("/welcome")
                 .and().logout();
     }
 

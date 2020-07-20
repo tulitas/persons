@@ -84,26 +84,30 @@
 <h2>Login Form</h2>
 
 <%--<form action="/?" method="post">--%>
-<div class="imgcontainer">
-    <img src="" alt="Avatar" class="avatar">
-</div>
 
-<form name="login" action="${pageContext.request.contextPath}/login/process" method='POST'>
+
+<form name="login" action="${pageContext.request.contextPath}/login/process" method='POST' >
     <table>
         <tr>
             <td>Login:</td>
-            <td><input type="text" name="login"></td>
+            <td><input type="text" name="login" value="login" id="login" ></td>
         </tr>
         <tr>
             <td>Password:</td>
             <td><input type="password" name="password"/></td>
         </tr>
+
         <tr>
-            <td colspan='2'><input name="submit" type="submit" value="submit"/></td>
+            <td colspan='2'><input name="submit"
+                                   type="submit"
+                                   value="login"
+                                    /></td>
         </tr>
     </table>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 </form>
+
 <%--</form>--%>
 </body>
 <a href="${pageContext.request.contextPath}/">Main Page</a>

@@ -10,6 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import persons.controllers.OptionsController;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
 
@@ -48,14 +49,12 @@ public class AuthProviderImpl implements AuthenticationProvider {
         Object y = passwordCoder.getHashtext();
 
         if (x.equals(y)) {
-            System.out.println("aaaa");
-//            throw new BadCredentialsException("Bad credential");
+            System.out.println("login");
 
         }
 
 
-
-            List<GrantedAuthority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
         return new UsernamePasswordAuthenticationToken(persons, null, authorities);
     }

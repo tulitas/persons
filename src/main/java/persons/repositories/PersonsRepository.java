@@ -12,5 +12,6 @@ public interface PersonsRepository extends CrudRepository<Persons, Long> {
     @Query(value = "SELECT * from persons.persons where login=:login", nativeQuery = true)
     Persons getLogin(String login);
 
-
+    @Query(value = "SELECT count(login) from persons.persons where login=:login", nativeQuery = true)
+    String getLoginName(String login);
 }

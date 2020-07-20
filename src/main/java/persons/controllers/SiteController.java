@@ -31,4 +31,27 @@ public class SiteController {
     public ModelAndView edit() {
         return new ModelAndView("edit");
     }
+
+    @RequestMapping("/welcome")
+    public ModelAndView welcome() {
+        return new ModelAndView("welcome");
+    }
+
+    @RequestMapping(value = "/palindrom")
+    public ModelAndView Palindrom() {
+        return new ModelAndView("palindrom");
+    }
+    @RequestMapping(value = "/result")
+    public ModelAndView result() {
+        return new ModelAndView("result");
+    }
+    @RequestMapping(value = "/numberToStringX")
+    public ModelAndView numberToStringX() {
+        return new ModelAndView("numberToStringX");
+    }
+
+    @RequestMapping(value = "/result2")
+    public ModelAndView result2() {
+        return new ModelAndView("result2");
+    }
 }

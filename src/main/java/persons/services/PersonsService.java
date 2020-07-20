@@ -20,4 +20,6 @@ public interface PersonsService {
 //    String getPassword();
 
     String getLogin(String login);
+
+    String getLoginName(String login);
 }

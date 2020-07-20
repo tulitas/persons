@@ -3,7 +3,6 @@ package persons.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,13 +20,11 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
-import java.security.MessageDigest;
+import java.security.AuthProvider;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Controller
 @RequestMapping("/")
@@ -36,7 +33,6 @@ public class OptionsController {
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
-
     @PersistenceContext
     private EntityManager em;
     @Autowired
@@ -47,8 +43,11 @@ public class OptionsController {
         this.personsService = personsService;
     }
 
+
+
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String loginValidation(Persons persons, String password, Model model, String login, BindingResult result, @RequestParam(value = "error", required = false) String error) throws NoSuchAlgorithmException {
+    public String loginValidation(Persons persons, String password, Model model, String login, BindingResult result, @RequestParam(value = "error", required = false)
+            String error) throws NoSuchAlgorithmException {
 
         Persons personFromBd = personsRepository.getLogin(login);
         if (personFromBd != null) {
@@ -141,13 +140,11 @@ public class OptionsController {
         return "personsList";
     }
 
-    @RequestMapping(value = "/loginn")
-    public String login(@RequestParam(name = "error", required = false) Boolean error,
-                        Model model) {
-        if (Boolean.TRUE.equals(error)) {
-            model.addAttribute("error", true);
-        }
-        return "personsList";
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    public String login(  Model model, Persons persons, String login) {
+
+       model.addAttribute("welcome", persons.getLogin()) ;
+        return "welcome";
     }
 
     public String getData() {
@@ -157,4 +154,6 @@ public class OptionsController {
     private void setData(String data) {
         this.data = data;
     }
+
+
 }
