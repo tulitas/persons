@@ -45,9 +45,10 @@ public class AuthProviderImpl implements AuthenticationProvider {
             throw new UsernameNotFoundException("User not found");
         }
 
-        Object x = persons.getPassword();
-        Object y = passwordCoder.getHashtext();
-
+        String x = persons.getPassword();
+        assert passwordCoder != null;
+        String y = passwordCoder.getHashtext();
+        System.out.println("1 - " + persons.getPassword() + "\n" + "2 - " + passwordCoder.getHashtext());
         if (x.equals(y)) {
             System.out.println("login");
 
