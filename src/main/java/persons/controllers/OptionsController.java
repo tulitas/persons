@@ -3,6 +3,7 @@ package persons.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +21,6 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
-import java.security.AuthProvider;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +33,7 @@ public class OptionsController {
     private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     @PersistenceContext
     private EntityManager em;
     @Autowired
@@ -54,10 +55,9 @@ public class OptionsController {
             model.addAttribute("error", login);
             return "error";
         } else {
-            PasswordCoder passwordCoder = new PasswordCoder(password);
-            persons.setPassword((passwordCoder.getHashtext() + " " + passwordCoder.getHashedPassword()));
+//            PasswordCoder passwordCoder = new PasswordCoder(password);
+            persons.setPassword(encoder.encode(password));
             personsService.addPersons(persons);
-            System.out.println("1 " + passwordCoder.getHashtext() + "\n" + " 2 " + passwordCoder.getHashedPassword());
             model.addAttribute("personToPopUp", persons);
             logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
             return "create";

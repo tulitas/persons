@@ -1,16 +1,15 @@
 package persons.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import persons.controllers.OptionsController;
+import org.springframework.transaction.annotation.Transactional;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
 
@@ -21,17 +20,19 @@ import java.util.List;
 @Component
 public class AuthProviderImpl implements AuthenticationProvider {
 
-
+    private String passwordFromDb;
 
     @Autowired
     PersonsRepository personsRepository;
 
-
+    @Transactional
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
+        ;
         String login = authentication.getName();
         Persons persons = personsRepository.getLogin(login);
+        passwordFromDb = persons.getPassword();
+
         String password = authentication.getCredentials().toString();
         PasswordCoder passwordCoder = null;
         try {
@@ -45,19 +46,24 @@ public class AuthProviderImpl implements AuthenticationProvider {
             throw new UsernameNotFoundException("User not found");
         }
 
-        String x = persons.getPassword();
+
         assert passwordCoder != null;
-        String y = passwordCoder.getHashtext();
-        System.out.println("1 - " + persons.getPassword() + "\n" + "2 - " + passwordCoder.getHashtext());
-        if (x.equals(y)) {
-            System.out.println("login");
+        System.out.println("1 - " + passwordFromDb + "\n" + "2 - " + passwordCoder.getExistingPassword());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!passwordEncoder.matches(password, passwordFromDb )) {
+
+            throw new UsernameNotFoundException("User or password not found");
 
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+        System.out.println("!!!!!" + encoder.matches(password, passwordFromDb));
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         return new UsernamePasswordAuthenticationToken(persons, null, authorities);
+
+
     }
 
     @Override
