@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="<c:url value="/resources/css/welcome.css"/>" rel="stylesheet">
     <title>Welcome</title>
 </head>
 <sec:authorize access="isAuthenticated()">
@@ -22,7 +23,10 @@
         <button onclick="location.href='/palindrom'">Palindrom</button>
         <button onclick="location.href='/numberToStringX'">Number To String</button>
 
-
+    <div class="wrapper">
+        <button class="btn"></button>
+        <button class="btn style1"></button>
+    </div>
     </body>
 </sec:authorize>
 </html>

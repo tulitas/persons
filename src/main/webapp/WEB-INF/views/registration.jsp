@@ -9,62 +9,69 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
+    <link href="<c:url value="/resources/css/registration.css"/>" rel="stylesheet">
+    <script src="<c:url value="/resources/JS/jquery.1.10.2.min" />"></script>
+    <script src="<c:url value="/resources/JS/registration.js"/>"></script>
     <title>Sign Up</title>
 </head>
 <body>
-
-<script type="text/javascript">
-
-    function zero_first_format(value) {
-        if (value < 10) {
-            value = '0' + value;
-        }
-        return value;
-    }
-
-    function date_time() {
-        var current_datetime = new Date();
-        var day = zero_first_format(current_datetime.getDate());
-        var month = zero_first_format(current_datetime.getMonth() + 1);
-        var year = current_datetime.getFullYear();
-        var hours = zero_first_format(current_datetime.getHours());
-        var minutes = zero_first_format(current_datetime.getMinutes());
-        var seconds = zero_first_format(current_datetime.getSeconds());
+<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
 
-        document.getElementById('current_date_time_block').innerHTML =
-            day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
-    }
+<nav>
+    <a href="${pageContext.request.contextPath}/">
+        <span>HOME</span>
+    </a>
+    <a href="#!">
+        <span>A</span>
+    </a>
+    <a href="#!">
+        <span>C</span>
+    </a>
+    <a href="#!">
+        <span>F</span>
+    </a>
+</nav>
 
-    setInterval(date_time, 0);
-</script>
-<div>
-    <form action="${pageContext.request.contextPath}options/create" method="post">
 
-        <label for="login">Login</label>
-        <input type="text" name="login" id="login"><br>
+<div class="wrapper">
+    <h1>Register For An Account</h1>
+    <p>To sign-up for a free basic account please provide us with some basic information using
+        the contact form below. Please use valid credentials.</p>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password"><br>
+    <form class="form" method="post" action="${pageContext.request.contextPath}options/create">
 
-        <label for="full_name">Name</label>
-        <input type="text" name="fullName" id="full_name"><br>
+        <input type="text" name="login" id="login" placeholder="Login Name"><br>
 
-        <label for="age">Age</label>
-        <input type="text" name="age" id="age"><br>
+        <input type="text" class="name" placeholder="Name" autocomplete="off" id="name" name="fullName">
+        <%--<div>--%>
+        <%--<p class="name-help">Please enter your name.</p>--%>
+        <%--</div>--%>
 
-        <label for="current_date_time_block">Time set automatically</label>
-        <textarea hidden name="regDate" id="current_date_time_block"></textarea>
-        <p>
-            <button class="add_button">Add</button>
-        </p>
+        <input type="email" class="email" placeholder="Email" id="email" autocomplete="off" name="email">
+        <%--<div>--%>
+        <%--<p class="email-help">Please enter your current email address.</p>--%>
+        <%--</div>--%>
 
+        <input type="password" class="password" placeholder="password" id="password" autocomplete="off" name="password">
+        <%--<div>--%>
+        <%--<p class="email-help">Please enter your password.</p>--%>
+        <%--</div>--%>
+
+        <input type="text" name="age" id="age" placeholder="Age"><br>
+
+        <textarea hidden name="regDate" type="text" id="current_date_time_block"></textarea>
+        <input type="submit" class="submit" value="Register">
     </form>
-
-<c:if test="${not empty errorMesage}">${errorMesage}</c:if>
+    <%--<output name="regDate" style="color: #1A878F" id="current_date_time_block"></output>--%>
 </div>
+<p class="optimize">
+    Optimized for Chrome & Firefox!
+</p>
+
+
 </body>
-<a href="${pageContext.request.contextPath}/">Main Page</a>
 
 </html>

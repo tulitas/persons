@@ -13,7 +13,6 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
-import persons.security.PasswordCoder;
 import persons.services.PersonsService;
 
 import javax.persistence.EntityManager;

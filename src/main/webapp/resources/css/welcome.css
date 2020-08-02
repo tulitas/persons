@@ -1,0 +1,68 @@
+body {
+    background: url("https://i.pinimg.com/originals/6c/2d/92/6c2d92b4fe777b51115f64d65fe86c62.jpg");
+    full: 100%;
+    auto: 0 auto;
+    align: center;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.wrapper {
+
+    width: 500px;
+    height: 233px;
+    margin: 10% auto 0;
+    text-align: center;
+    padding-top: 20px;
+    border: 1px solid #242424;
+}
+
+button {
+    display: inline-block;
+    cursor: pointer;
+    width: 102px;
+    height: 46px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border: 1px solid black;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,1);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,1);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,1);
+    background-color: #c3c3c3;
+    *background-color: #c3c3c3;
+    background-image: -ms-linear-gradient(top, #dcdcdc, #c3c3c3);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dcdcdc), to(#c3c3c3));
+    background-image: -webkit-linear-gradient(top, #dcdcdc, #c3c3c3);
+    background-image: -o-linear-gradient(top, #dcdcdc, #c3c3c3);
+    background-image: linear-gradient(top, #dcdcdc, #c3c3c3);
+    background-image: -moz-linear-gradient(top, #dcdcdc, #c3c3c3);
+    background-repeat: repeat-x;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    margin: 5px;
+}
+
+button:hover {
+    background-image: none;
+    background-color: #aaaaaa;
+}
+
+button[class*=style] {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.style1 {
+    background-color: #435c85;
+    *background-color: #435c85;
+    background-image: -ms-linear-gradient(top, #5777ab, #435c85);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5777ab), to(#435c85));
+    background-image: -webkit-linear-gradient(top, #5777ab, #435c85);
+    background-image: -o-linear-gradient(top, #5777ab, #435c85);
+    background-image: linear-gradient(top, #5777ab, #435c85);
+    background-image: -moz-linear-gradient(top, #5777ab, #435c85);
+}

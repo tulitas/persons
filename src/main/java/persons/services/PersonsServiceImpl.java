@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import persons.models.Persons;
 import persons.repositories.PersonsRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 

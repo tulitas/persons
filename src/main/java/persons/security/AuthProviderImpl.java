@@ -28,7 +28,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
     @Transactional
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        ;
+
         String login = authentication.getName();
         Persons persons = personsRepository.getLogin(login);
         passwordFromDb = persons.getPassword();
