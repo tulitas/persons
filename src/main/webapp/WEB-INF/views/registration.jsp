@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: SergejK
-  Date: 09-Jul-20
-  Time: 07:22 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -44,28 +38,13 @@
     <form class="form" method="post" action="${pageContext.request.contextPath}options/create">
 
         <input type="text" name="login" id="login" placeholder="Login Name"><br>
-
         <input type="text" class="name" placeholder="Name" autocomplete="off" id="name" name="fullName">
-        <%--<div>--%>
-        <%--<p class="name-help">Please enter your name.</p>--%>
-        <%--</div>--%>
-
         <input type="email" class="email" placeholder="Email" id="email" autocomplete="off" name="email">
-        <%--<div>--%>
-        <%--<p class="email-help">Please enter your current email address.</p>--%>
-        <%--</div>--%>
-
         <input type="password" class="password" placeholder="password" id="password" autocomplete="off" name="password">
-        <%--<div>--%>
-        <%--<p class="email-help">Please enter your password.</p>--%>
-        <%--</div>--%>
-
         <input type="text" name="age" id="age" placeholder="Age"><br>
-
-        <textarea hidden name="regDate" type="text" id="current_date_time_block"></textarea>
+        <input type="text" name="dateOfBirth" id="dateofbirth" placeholder="format: DD.MM.YY">
         <input type="submit" class="submit" value="Register">
     </form>
-    <%--<output name="regDate" style="color: #1A878F" id="current_date_time_block"></output>--%>
 </div>
 <p class="optimize">
     Optimized for Chrome & Firefox!

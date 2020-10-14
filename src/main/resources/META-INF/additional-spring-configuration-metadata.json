@@ -24,5 +24,10 @@
       "name": "application.properties",
       "type": "java.lang.String",
       "description": "Description for application.properties."
+    },
+    {
+      "name": "default-time-zone",
+      "type": "java.lang.String",
+      "description": "Description for default-time-zone."
     }
   ] }

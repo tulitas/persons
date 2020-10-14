@@ -24,8 +24,8 @@ public class Persons implements java.io.Serializable {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "reg_date")
-    private String regDate;
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
 
     public long getId() {
         return id;
@@ -67,12 +67,12 @@ public class Persons implements java.io.Serializable {
         this.age = age;
     }
 
-    public String getRegDate() {
-        return regDate;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setRegDate(String regDate) {
-        this.regDate = regDate;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -83,7 +83,8 @@ public class Persons implements java.io.Serializable {
                 ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", age=" + age +
-                ", regDate='" + regDate + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
     }
 }
+

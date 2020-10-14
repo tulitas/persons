@@ -20,7 +20,6 @@ public class SiteController {
     @RequestMapping("/registration")
     public ModelAndView registration() {
         return new ModelAndView("registration");
-
     }
     @RequestMapping("/personsList")
     public ModelAndView personsList() {

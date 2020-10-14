@@ -1,13 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ taglib prefix="sec" uri="http://www.springframework.org/tags" %>--%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: SergejK
-  Date: 11-Jul-20
-  Time: 12:54 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -116,7 +110,7 @@
             <th>Login</th>
             <th>Full Name</th>
             <th>Age</th>
-            <th>Registration Date</th>
+            <th>Date Of Birth</th>
             <th colspan="2">Action</th>
 
 
@@ -130,7 +124,7 @@
                 <td width="50">${personsForm.login}</td>
                 <td width="50">${personsForm.fullName}</td>
                 <td width="50">${personsForm.age}</td>
-                <td width="50">${personsForm.regDate}</td>
+                <td width="50">${personsForm.dateOfBirth}</td>
                 <td width="50"><a href="/options/delete${personsForm.id}">Delete</a></td>
                 <td width="50"><a class="delete" href="/options/edit${personsForm.id}">Edit</a></td>
             </tr>

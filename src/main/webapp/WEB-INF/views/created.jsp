@@ -1,11 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: SergejK
-  Date: 11-Jul-20
-  Time: 09:19 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -60,14 +54,14 @@
                 <th>ID</th>
                 <th>Full Name</th>
                 <th>Age</th>
-                <th>Registration Date</th>
+                <th>Date Of Birth</th>
             </tr>
             <tr>
                 <td width="75">${personToPopUp.id}</td>
 
                 <td width="50">${personToPopUp.fullName}</td>
                 <td width="50">${personToPopUp.age}</td>
-                <td width="50">${personToPopUp.regDate}</td>
+                <td width="50">${personToPopUp.dateOfBirth}</td>
 
             </tr>
         </table>

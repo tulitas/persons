@@ -14,7 +14,6 @@ public class PassCod {
         if (value == null) {
             return value;
         }
-        // SALT is your secret key
         Key key = new SecretKeySpec(SALT.getBytes(), "AES");
         try {
 
@@ -31,7 +30,6 @@ public class PassCod {
         if (value == null) {
             return value;
         }
-        // SALT is your secret key
         Key key = new SecretKeySpec(SALT.getBytes(), "AES");
         try {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");

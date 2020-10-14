@@ -51,14 +51,17 @@ public class OptionsController {
 
         Persons personFromBd = personsRepository.getLogin(login);
         if (personFromBd != null) {
-            model.addAttribute("error", login);
+            model.addAttribute(error, "login exist");
             return "error";
         } else {
 //            PasswordCoder passwordCoder = new PasswordCoder(password);
             persons.setPassword(encoder.encode(password));
             personsService.addPersons(persons);
+            System.out.println(persons);
             model.addAttribute("personToPopUp", persons);
-            logger.info(persons.getRegDate() + " " + persons.getFullName() + " " + "Was Created");
+
+            logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
+
             return "create";
         }
     }
@@ -106,7 +109,7 @@ public class OptionsController {
                 persons.setPassword(data[2]);
                 persons.setFullName(data[3]);
                 persons.setAge(Integer.parseInt(data[4]));
-                persons.setRegDate(data[5]);
+                persons.setDateOfBirth(data[5]);
                 personsService.addPersons(persons);
             }
         } catch (IOException e) {
