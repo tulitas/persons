@@ -108,8 +108,8 @@ public class OptionsController {
                 persons.setLogin(data[1]);
                 persons.setPassword(data[2]);
                 persons.setFullName(data[3]);
-                persons.setAge(Integer.parseInt(data[4]));
-                persons.setDateOfBirth(data[5]);
+                persons.setDateOfBirth(data[4]);
+                persons.setGender(data[5]);
                 personsService.addPersons(persons);
             }
         } catch (IOException e) {

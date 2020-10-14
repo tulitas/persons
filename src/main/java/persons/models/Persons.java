@@ -21,11 +21,19 @@ public class Persons implements java.io.Serializable {
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "age")
-    private int age;
-
     @Column(name = "date_of_birth")
     private String dateOfBirth;
+
+    @Column(name = "gender")
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public long getId() {
         return id;
@@ -59,14 +67,6 @@ public class Persons implements java.io.Serializable {
         this.fullName = fullName;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getDateOfBirth() {
         return dateOfBirth;
     }
@@ -82,8 +82,8 @@ public class Persons implements java.io.Serializable {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
-                ", age=" + age +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }
