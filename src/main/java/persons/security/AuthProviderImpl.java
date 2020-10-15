@@ -48,7 +48,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
 
 
         assert passwordCoder != null;
-        System.out.println("1 - " + passwordFromDb + "\n" + "2 - " + passwordCoder.getExistingPassword());
+//        System.out.println("1 - " + passwordFromDb + "\n" + "2 - " + passwordCoder.getExistingPassword());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (!passwordEncoder.matches(password, passwordFromDb )) {
 
@@ -57,7 +57,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        System.out.println("!!!!!" + encoder.matches(password, passwordFromDb));
+//        System.out.println("!!!!!" + encoder.matches(password, passwordFromDb));
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 

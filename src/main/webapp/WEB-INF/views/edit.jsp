@@ -14,8 +14,7 @@
                 <input type="text" name="login" id="login" value="${personToEdit.get().login}">
                 <input hidden type="text" name="password" id="password" value="${personToEdit.get().password}">
                 <input type="text" name="fullName" id="full_name" value="${personToEdit.get().fullName}"/>
-                <input type="text" id="age" name="age" value="${personToEdit.get().age}">
-                <input type="text" id="reg_date" name="regDate" value="${personToEdit.get().regDate}">
+                <input type="text" id="dateofbirth" name="dateofbirth" value="${personToEdit.get().dateOfBirth}">
                 <br/>
                 <button class="add_button"> Pievienot</button>
             </div>

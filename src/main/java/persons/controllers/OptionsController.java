@@ -23,6 +23,8 @@ import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 
 @Controller
@@ -33,6 +35,7 @@ public class OptionsController {
     private String data = null;
     private String line = "";
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private FileHandler fh;
     @PersistenceContext
     private EntityManager em;
     @Autowired
@@ -43,27 +46,36 @@ public class OptionsController {
         this.personsService = personsService;
     }
 
+    public OptionsController() {
+
+    }
 
 
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
-    public String loginValidation(Persons persons, String password, Model model, String login, BindingResult result, @RequestParam(value = "error", required = false)
-            String error) throws NoSuchAlgorithmException {
-
+    public String loginValidation(Persons persons, String password, Model model, String login,
+                                  @RequestParam(value = "error", required = false)
+            String error)  {
         Persons personFromBd = personsRepository.getLogin(login);
         if (personFromBd != null) {
             model.addAttribute(error, "login exist");
             return "error";
         } else {
-//            PasswordCoder passwordCoder = new PasswordCoder(password);
             persons.setPassword(encoder.encode(password));
             personsService.addPersons(persons);
-            System.out.println(persons);
             model.addAttribute("personToPopUp", persons);
-
             logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
-
-            return "create";
+//            try {
+//                fh = new FileHandler("src/main/resources/logs.txt");
+//                logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
+//                logger.addHandler(fh);
+//                SimpleFormatter formatter = new SimpleFormatter();
+//                fh.setFormatter(formatter);
+//            } catch (SecurityException | IOException e) {
+//                e.printStackTrace();
+//            }
+            return "index";
         }
+
     }
 
     @RequestMapping(value = "options/personsList")
@@ -86,8 +98,8 @@ public class OptionsController {
 
         ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 
-        String[] csvHeader = {"User Id", "Login", "Name", "Age"};
-        String[] nameMaping = {"id", "login", "fullName", "age"};
+        String[] csvHeader = {"User Id", "Login", "Name", "DateOfBirth"};
+        String[] nameMaping = {"id", "login", "fullName", "dateOfBirth"};
 
         csvBeanWriter.writeHeader(csvHeader);
         for (Persons persons : personsList) {

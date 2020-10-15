@@ -109,8 +109,8 @@
             <th>ID</th>
             <th>Login</th>
             <th>Full Name</th>
-            <th>Age</th>
             <th>Date Of Birth</th>
+            <th>Gender</th>
             <th colspan="2">Action</th>
 
 
@@ -120,11 +120,10 @@
 
             <tr>
                 <td width="75">${personsForm.id}</td>
-
                 <td width="50">${personsForm.login}</td>
                 <td width="50">${personsForm.fullName}</td>
-                <td width="50">${personsForm.age}</td>
                 <td width="50">${personsForm.dateOfBirth}</td>
+                <td width="50">${personsForm.gender}</td>
                 <td width="50"><a href="/options/delete${personsForm.id}">Delete</a></td>
                 <td width="50"><a class="delete" href="/options/edit${personsForm.id}">Edit</a></td>
             </tr>
