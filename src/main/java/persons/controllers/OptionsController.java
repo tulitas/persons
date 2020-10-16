@@ -1,5 +1,7 @@
 package persons.controllers;
 
+
+import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +22,16 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.FileHandler;
-import java.util.logging.SimpleFormatter;
 
 
 @Controller
 @RequestMapping("/")
 public class OptionsController {
     private PersonsService personsService;
-    private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
+//    private static Logger logger = LoggerFactory.getLogger(OptionsController.class);
     private String data = null;
     private String line = "";
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -63,19 +63,10 @@ public class OptionsController {
             persons.setPassword(encoder.encode(password));
             personsService.addPersons(persons);
             model.addAttribute("personToPopUp", persons);
-            logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
-//            try {
-//                fh = new FileHandler("src/main/resources/logs.txt");
-//                logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
-//                logger.addHandler(fh);
-//                SimpleFormatter formatter = new SimpleFormatter();
-//                fh.setFormatter(formatter);
-//            } catch (SecurityException | IOException e) {
-//                e.printStackTrace();
-//            }
+//            logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
+
             return "index";
         }
-
     }
 
     @RequestMapping(value = "options/personsList")
@@ -123,10 +114,11 @@ public class OptionsController {
                 persons.setDateOfBirth(data[4]);
                 persons.setGender(data[5]);
                 personsService.addPersons(persons);
+                System.out.println(3);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+       }
 
     }
 

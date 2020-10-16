@@ -129,8 +129,8 @@
             </tr>
         </c:forEach>
     </table>
-    <button onclick="location.href='/options/csv'">download CSV</button>
-    <button onclick="location.href='/options/uploadCsv'">upload CSV</button>
+    <button onclick="location.href='/options/csv'">Export CSV</button>
+    <button onclick="location.href='/options/uploadCsv'">Import CSV</button>
     <br>
 
     <body>
@@ -140,7 +140,7 @@
     </body>
 </sec:authorize>
 
-<a href="${pageContext.request.contextPath}/">Main Page</a>
+<a href="${pageContext.request.contextPath}/welcome">Main Page</a>
 <div>
     Current Time :<%= new java.util.Date() %><br>
 </div>

@@ -6,7 +6,7 @@
 </head>
 <body>
  ${error}
-<a href="${pageContext.request.contextPath}/">Main Page</a>
+<a href="${pageContext.request.contextPath}/welcome">Main Page!</a>
 
 </body>
 </html>
