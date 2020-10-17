@@ -109,8 +109,8 @@ public class OptionsController {
                 Persons persons = new Persons();
                 persons.setId(Long.parseLong(data[0]));
                 persons.setLogin(data[1]);
-                persons.setPassword(data[2]);
-                persons.setFullName(data[3]);
+                persons.setFullName(data[2]);
+                persons.setPassword(data[3]);               ;
                 persons.setDateOfBirth(data[4]);
                 persons.setGender(data[5]);
                 personsService.addPersons(persons);

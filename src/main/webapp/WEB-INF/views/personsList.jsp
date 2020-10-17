@@ -6,6 +6,8 @@
 <html>
 <head>
     <link href="<c:url value="/resources/css/personsList.css"/>" rel="stylesheet">
+    <script src="<c:url value="/resources/JS/personsList.js"/>"></script>
+
     <meta http-equiv="refresh" content="10"/>
     <style>
 
@@ -14,96 +16,15 @@
 
 <body style="background-color: #f4e6e8">
 <script>
-    function sortTableByLogin() {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("myTable");
-        switching = true;
 
-        while (switching) {
-
-            switching = false;
-            rows = table.rows;
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("TD")[1];
-                y = rows[i + 1].getElementsByTagName("TD")[1];
-
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-            if (shouldSwitch) {
-
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
-
-    function sortTableByLoginByName() {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("myTable");
-        switching = true;
-
-        while (switching) {
-
-            switching = false;
-            rows = table.rows;
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("TD")[2];
-                y = rows[i + 1].getElementsByTagName("TD")[2];
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-            if (shouldSwitch) {
-
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
-
-    function sortTableByAge() {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("myTable");
-        switching = true;
-        while (switching) {
-            switching = false;
-            rows = table.rows;
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("TD")[3];
-                y = rows[i + 1].getElementsByTagName("TD")[3];
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-            if (shouldSwitch) {
-
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
 </script>
 <sec:authorize access="isAuthenticated()">
     <button onclick="sortTableByLogin()">Sort by login</button>
     <button onclick="sortTableByLoginByName()">Sort by name</button>
     <button onclick="sortTableByAge()">Sort by age</button>
     <button onclick="location.href='/palindrom'">Palindrom</button>
-    <button onclick="location.href='/numberToStringX'">Number To String</button>
+    <button onclick="location.href='/numberToStringX'">Number To String</button><br>
+    <input class="form-control" type="text" placeholder="Write Name or login to find" id="search-text" onkeyup="tableSearch()">
     <table id="myTable">
         <tr>
             <th>ID</th>

@@ -39,10 +39,8 @@
 
         <input type="text" name="login" id="login" placeholder="Login Name"><br>
         <input type="text" class="name" placeholder="Name" autocomplete="off" id="name" name="fullName">
-        <input type="email" class="email" placeholder="Email" id="email" autocomplete="off" name="email">
         <input type="password" class="password" placeholder="password" id="password" autocomplete="off" name="password">
         <input type="text" name="dateOfBirth" id="dateofbirth" placeholder="format: DD.MM.YY" class="name">
-
         <select name="gender" id="gender" class="select-css" style="width:200px;">
             <option value="male">Male</option>
             <option value="female">Female</option>
