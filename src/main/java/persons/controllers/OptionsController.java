@@ -1,9 +1,5 @@
 package persons.controllers;
 
-
-import org.apache.logging.log4j.LogManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -46,11 +42,6 @@ public class OptionsController {
         this.personsService = personsService;
     }
 
-    public OptionsController() {
-
-    }
-
-
     @RequestMapping(value = "/options/create", method = RequestMethod.POST)
     public String loginValidation(Persons persons, String password, Model model, String login,
                                   @RequestParam(value = "error", required = false)
@@ -64,8 +55,7 @@ public class OptionsController {
             personsService.addPersons(persons);
             model.addAttribute("personToPopUp", persons);
 //            logger.info(persons.getDateOfBirth() + " " + persons.getFullName() + " " + "Was Created");
-
-            return "index";
+            return "created";
         }
     }
 
@@ -77,7 +67,6 @@ public class OptionsController {
         return "personsList";
     }
 
-
     @GetMapping(value = "options/csv")
     public String exportToCsv(HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
@@ -86,12 +75,9 @@ public class OptionsController {
         String headerValue = "attachment; filename " + fileName;
         response.setHeader(headerKey, headerValue);
         List<Persons> personsList = personsService.getAll();
-
         ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-
         String[] csvHeader = {"User Id", "Login", "Name", "DateOfBirth"};
         String[] nameMaping = {"id", "login", "fullName", "dateOfBirth"};
-
         csvBeanWriter.writeHeader(csvHeader);
         for (Persons persons : personsList) {
             csvBeanWriter.write(persons, nameMaping);
@@ -119,7 +105,6 @@ public class OptionsController {
         } catch (IOException e) {
             e.printStackTrace();
        }
-
     }
 
     @RequestMapping(value = "/options/delete{id}", method = RequestMethod.GET)
